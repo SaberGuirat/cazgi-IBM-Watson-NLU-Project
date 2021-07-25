@@ -55,17 +55,18 @@ app.get("/url/sentiment", (req, res) => {
   const analyzeParams = {
     url: req.query.url,
     features: {
-      entities: {
+      keywords: {
         sentiment: true,
         limit: 1,
       },
     },
   };
+
   const nlu = getNLUInstance();
   nlu
     .analyze(analyzeParams)
     .then((analysisResults) => {
-      res.send(analysisResults.result.entities[0].sentiment.label);
+      res.send(analysisResults.result.keywords[0].sentiment.label);
     })
     .catch((err) => {
       res.send(err.toString());
@@ -78,7 +79,7 @@ app.get("/text/emotion", (req, res) => {
     features: {
       keywords: {
         emotion: true,
-        limit:1
+        limit: 1,
       },
     },
   };
@@ -99,7 +100,7 @@ app.get("/text/sentiment", (req, res) => {
     features: {
       keywords: {
         sentiment: true,
-        limit:1
+        limit: 1,
       },
     },
   };
